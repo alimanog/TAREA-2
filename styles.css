@@ -1,0 +1,1023 @@
+/* ==========================================================================
+   DESIGN SYSTEM & GLASSMORPHISM TOKENS
+   ========================================================================== */
+:root {
+  /* Paleta adaptada al fondo dinámico abstracto azul/índigo */
+  --bg-app: #080d1a;
+  --bg-surface: rgba(15, 23, 42, 0.65);
+  --bg-card: rgba(13, 20, 36, 0.72);
+  --bg-card-subtle: rgba(255, 255, 255, 0.07);
+  --border-subtle: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.22);
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-tertiary: #94a3b8;
+  --primary-action: #3b82f6;
+  --primary-hover: #2563eb;
+  --primary-active: #1d4ed8;
+  --focus-ring: #60a5fa;
+  --accent-flame: #f97316;
+  --accent-flame-bg: rgba(234, 88, 12, 0.22);
+  --accent-flame-border: rgba(249, 115, 22, 0.4);
+
+  /* Tipografía */
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'Geist Mono', 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+
+  /* Radios */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* Sombras y Glassmorphism */
+  --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.4), 0 2px 6px -1px rgba(0, 0, 0, 0.25);
+  --glass-backdrop: blur(16px);
+  --glass-backdrop-webkit: blur(16px);
+}
+
+/* ==========================================================================
+   RESET & BASE STYLES
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-app) url('background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 32px 16px 56px;
+  min-height: 100vh;
+}
+
+/* ==========================================================================
+   LAYOUT Y ANIMACIONES DE ENTRADA
+   ========================================================================== */
+.app-layout {
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.app-header {
+  animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.streak-card {
+  animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
+}
+
+.stats-grid {
+  animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.14s both;
+}
+
+.form-card {
+  animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+.history-card {
+  animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.26s both;
+}
+
+/* ==========================================================================
+   CABECERA
+   ========================================================================== */
+.app-header {
+  text-align: center;
+  padding: 6px 0 12px;
+}
+
+.header-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 12px;
+  background-color: rgba(59, 130, 246, 0.18);
+  color: #93c5fd;
+  border: 1px solid rgba(147, 197, 253, 0.3);
+  border-radius: var(--radius-full);
+  margin-bottom: 12px;
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop-webkit);
+}
+
+.app-title {
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+  margin-bottom: 6px;
+}
+
+.app-subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* ==========================================================================
+   TARJETAS COMUNES (Glassmorphism)
+   ========================================================================== */
+.card {
+  background-color: var(--bg-card);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop-webkit);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+  border-color: var(--border-strong);
+}
+
+.card-kicker {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+/* ==========================================================================
+   SECCIÓN DE RACHA
+   ========================================================================== */
+.streak-card {
+  text-align: center;
+  background: linear-gradient(180deg, rgba(20, 29, 50, 0.8) 0%, rgba(13, 20, 36, 0.75) 100%);
+  border-color: var(--border-strong);
+}
+
+.streak-hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 10px 0 6px;
+}
+
+.streak-flame {
+  display: inline-block;
+  font-size: 48px;
+  line-height: 1;
+  filter: drop-shadow(0 2px 8px rgba(234, 88, 12, 0.3));
+  transform-origin: center bottom;
+}
+
+@keyframes flameBreathing {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    filter: drop-shadow(0 2px 10px rgba(234, 88, 12, 0.35));
+  }
+  30% {
+    transform: scale(1.08) rotate(-2deg);
+    filter: drop-shadow(0 4px 18px rgba(234, 88, 12, 0.7));
+  }
+  70% {
+    transform: scale(1.04) rotate(2deg);
+    filter: drop-shadow(0 3px 14px rgba(234, 88, 12, 0.5));
+  }
+}
+
+.streak-card.has-streak .streak-flame {
+  animation: flameBreathing 2.6s ease-in-out infinite;
+}
+
+.streak-number {
+  display: inline-block;
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+}
+
+@keyframes numberBump {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.2); color: #60a5fa; }
+  100% { transform: scale(1); }
+}
+
+.streak-number.bump-animation {
+  animation: numberBump 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.streak-label {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  align-self: flex-end;
+  margin-bottom: 12px;
+}
+
+.streak-message {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   PANELES DE CONTADORES / MÉTRICAS (Tiempo total, Hoy, Sesiones)
+   ========================================================================== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.stat-card {
+  background-color: var(--bg-card);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop-webkit);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-strong);
+}
+
+.stat-icon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.stat-value {
+  font-size: 17px;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+
+.stat-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ==========================================================================
+   FORMULARIO DE REGISTRO & CRONÓMETRO DE ESTUDIO
+   ========================================================================== */
+.form-card .section-title {
+  margin-bottom: 20px;
+}
+
+.session-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.form-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Botón alternador del cronómetro */
+.timer-toggle-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #93c5fd;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.timer-toggle-btn:hover {
+  background: rgba(59, 130, 246, 0.15);
+  border-color: #3b82f6;
+  color: #ffffff;
+}
+
+/* Widget de cronómetro integrado */
+.timer-widget {
+  background-color: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  animation: fadeInUp 0.25s ease-out both;
+}
+
+.timer-widget[hidden] {
+  display: none;
+}
+
+.timer-display {
+  display: flex;
+  flex-direction: column;
+}
+
+.timer-digits {
+  font-family: var(--font-mono);
+  font-size: 24px;
+  font-weight: 700;
+  color: #38bdf8;
+  letter-spacing: 0.05em;
+  line-height: 1.1;
+}
+
+.timer-status {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+
+.timer-controls {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.timer-btn {
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 11px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.timer-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.timer-btn-start {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.timer-btn-start:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.timer-btn-reset {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: var(--text-secondary);
+}
+
+.timer-btn-reset:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+}
+
+.timer-btn-apply {
+  background: #059669;
+  color: #ffffff;
+}
+
+.timer-btn-apply:hover:not(:disabled) {
+  background: #047857;
+}
+
+/* Inputs de texto / fecha / números */
+.form-input {
+  font-family: inherit;
+  font-size: 14px;
+  color: #ffffff;
+  background-color: rgba(15, 23, 42, 0.65);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  width: 100%;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+  background-color: rgba(15, 23, 42, 0.85);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: var(--primary-action);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background-color 0.18s ease, transform 0.12s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.18s ease;
+  box-shadow: var(--shadow-sm);
+  margin-top: 4px;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary:active {
+  background-color: var(--primary-active);
+  transform: translateY(1px);
+}
+
+.btn-primary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--bg-card), 0 0 0 4px var(--focus-ring);
+}
+
+/* ==========================================================================
+   HISTORIAL DE SESIONES
+   ========================================================================== */
+.history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.badge-counter {
+  font-size: 12px;
+  font-weight: 500;
+  color: #93c5fd;
+  background-color: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(147, 197, 253, 0.25);
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+}
+
+.sessions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.session-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  background-color: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.session-item:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+@keyframes sessionAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.97);
+    border-color: #38bdf8;
+    background-color: rgba(56, 189, 248, 0.18);
+  }
+  50% {
+    border-color: #38bdf8;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    border-color: var(--border-subtle);
+    background-color: rgba(15, 23, 42, 0.6);
+  }
+}
+
+.session-item-new {
+  animation: sessionAppear 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.session-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.session-topic {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.session-date {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.session-minutes {
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #93c5fd;
+  background-color: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(147, 197, 253, 0.2);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-variant-numeric: tabular-nums;
+  transition: transform 0.2s ease;
+}
+
+.session-item:hover .session-minutes {
+  transform: scale(1.03);
+}
+
+/* Estado Vacío */
+.empty-state {
+  text-align: center;
+  padding: 32px 16px;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-md);
+  background-color: rgba(15, 23, 42, 0.4);
+}
+
+.empty-state-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.empty-state-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.empty-state-subtext {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+/* ==========================================================================
+   COMPAÑERO INTERACTIVO: YUJI ITADORI
+   ========================================================================== */
+.yuji-companion {
+  position: fixed;
+  bottom: 20px;
+  right: 24px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.yuji-bubble {
+  pointer-events: auto;
+  position: relative;
+  background: rgba(13, 20, 36, 0.94);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop-webkit);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-lg);
+  padding: 10px 14px;
+  max-width: 290px;
+  margin-bottom: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  animation: fadeInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.yuji-bubble:hover {
+  border-color: #38bdf8;
+}
+
+/* Cabecera del chat con indicador de modelo */
+.yuji-chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.yuji-name-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: #38bdf8;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.yuji-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.yuji-icon-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  padding: 2px 5px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  line-height: 1;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.yuji-icon-btn:hover {
+  transform: scale(1.15);
+  background: rgba(56, 189, 248, 0.2);
+  border-color: #38bdf8;
+  color: #ffffff;
+}
+
+.yuji-icon-btn.playing {
+  animation: audioPulse 0.75s ease-in-out infinite alternate;
+  border-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.35);
+}
+
+@keyframes audioPulse {
+  from { transform: scale(1); filter: drop-shadow(0 0 2px #38bdf8); }
+  to { transform: scale(1.22); filter: drop-shadow(0 0 8px #38bdf8); }
+}
+
+.yuji-typing-tag {
+  font-size: 10px;
+  font-weight: 600;
+  color: #fbbf24;
+  animation: typingGlow 1s ease-in-out infinite alternate;
+}
+
+@keyframes typingGlow {
+  from { opacity: 0.5; }
+  to { opacity: 1; }
+}
+
+.yuji-speech-area {
+  margin-bottom: 8px;
+  max-height: 140px;
+  overflow-y: auto;
+}
+
+.yuji-speech {
+  font-size: 13px;
+  font-weight: 500;
+  color: #f8fafc;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Formulario para escribir mensajes a Yuji */
+.yuji-chat-form {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.yuji-chat-input {
+  flex: 1;
+  font-family: inherit;
+  font-size: 12px;
+  color: #ffffff;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--radius-full);
+  padding: 6px 12px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  min-width: 0;
+}
+
+.yuji-chat-input:focus {
+  outline: none;
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.25);
+  background: rgba(15, 23, 42, 0.9);
+}
+
+.yuji-send-btn {
+  flex-shrink: 0;
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-full);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.yuji-send-btn:hover {
+  background: #1d4ed8;
+  transform: scale(1.06);
+}
+
+.yuji-send-btn:active {
+  transform: scale(0.94);
+}
+
+.yuji-send-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.yuji-bubble-arrow {
+  position: absolute;
+  bottom: -6px;
+  right: 48px;
+  width: 10px;
+  height: 10px;
+  background: rgba(13, 20, 36, 0.92);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  transform: rotate(45deg);
+}
+
+.yuji-avatar-wrapper {
+  pointer-events: auto;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.yuji-avatar-wrapper:focus-visible {
+  outline: none;
+}
+
+.yuji-avatar-wrapper:focus-visible .yuji-avatar {
+  filter: drop-shadow(0 0 14px #38bdf8);
+}
+
+.yuji-avatar {
+  width: 115px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.5));
+  animation: yujiIdle 3.2s ease-in-out infinite;
+  transform-origin: center bottom;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s ease;
+}
+
+.yuji-avatar-wrapper:hover .yuji-avatar {
+  filter: drop-shadow(0 10px 24px rgba(56, 189, 248, 0.45));
+  transform: scale(1.05);
+}
+
+.yuji-avatar-wrapper:active .yuji-avatar {
+  transform: scale(0.95);
+}
+
+.yuji-click-hint {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #93c5fd;
+  background: rgba(15, 23, 42, 0.88);
+  border: 1px solid rgba(147, 197, 253, 0.35);
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+  margin-top: -6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+/* Animación de flotado suave */
+@keyframes yujiIdle {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(1.5deg);
+  }
+}
+
+/* Animación de salto alegre al interactuar */
+@keyframes yujiJump {
+  0% { transform: scale(1) translateY(0); }
+  25% { transform: scale(1.15, 0.85) translateY(4px); }
+  50% { transform: scale(0.9, 1.15) translateY(-20px) rotate(-4deg); }
+  75% { transform: scale(1.05, 0.95) translateY(-4px) rotate(2deg); }
+  100% { transform: scale(1) translateY(0) rotate(0deg); }
+}
+
+.yuji-avatar.jumping {
+  animation: yujiJump 0.65s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* ==========================================================================
+   BOTÓN DE MÚSICA DE FONDO JJK
+   ========================================================================== */
+
+#musicToggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(20, 20, 35, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  line-height: 1;
+}
+
+#musicToggle:hover {
+  transform: scale(1.12);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.45);
+}
+
+#musicToggle.playing {
+  animation: musicPulse 2s ease-in-out infinite;
+}
+
+@keyframes musicPulse {
+  0%, 100% { box-shadow: 0 4px 16px rgba(139, 92, 246, 0.35); }
+  50%       { box-shadow: 0 4px 28px rgba(139, 92, 246, 0.7); }
+}
+
+/* ==========================================================================
+   PIE DE PÁGINA
+   ========================================================================= */
+.app-footer {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-tertiary);
+  padding: 8px 0;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* ==========================================================================
+   ACCESIBILIDAD: PREFERS-REDUCED-MOTION (WCAG 2.1 AA)
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (Móvil)
+   ========================================================================== */
+@media (max-width: 540px) {
+  body {
+    padding: 20px 12px 40px;
+  }
+
+  .card {
+    padding: 18px 16px;
+  }
+
+  .app-title {
+    font-size: 25px;
+  }
+
+  .streak-number {
+    font-size: 50px;
+  }
+
+  .streak-flame {
+    font-size: 38px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .stat-card {
+    padding: 10px 14px;
+  }
+
+  .timer-widget {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .timer-controls {
+    width: 100%;
+  }
+
+  .timer-btn {
+    flex: 1;
+    text-align: center;
+  }
+
+  .yuji-companion {
+    bottom: 12px;
+    right: 12px;
+  }
+
+  .yuji-avatar {
+    width: 80px;
+  }
+
+  .yuji-bubble {
+    max-width: 190px;
+    padding: 8px 12px;
+  }
+
+  .yuji-speech {
+    font-size: 11px;
+  }
+
+  .yuji-bubble-arrow {
+    right: 30px;
+  }
+}

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diario de Estudio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Cabecera principal -->
+    <header class="app-header">
+      <div class="header-badge">Control de hábitos</div>
+      <h1 class="app-title">Diario de Estudio</h1>
+      <p class="app-subtitle">Registra tu progreso diario y mantén encendida tu motivación.</p>
+    </header>
+
+    <main class="main-content">
+      <!-- Indicador destacado de Racha Actual -->
+      <section id="streakCard" class="card streak-card" aria-label="Racha actual de estudio">
+        <span class="card-kicker">RACHA ACTUAL</span>
+        <div class="streak-hero">
+          <span class="streak-flame" aria-hidden="true">🔥</span>
+          <span id="streakCount" class="streak-number">0</span>
+          <span class="streak-label">días seguidos</span>
+        </div>
+        <p id="streakMessage" class="streak-message">Registra tu primera sesión para comenzar la racha.</p>
+      </section>
+
+      <!-- Métricas y Contadores de Estudio -->
+      <section class="stats-grid" aria-label="Contadores de estudio">
+        <div class="stat-card">
+          <span class="stat-icon" aria-hidden="true">⏱️</span>
+          <div class="stat-info">
+            <span id="totalTimeCount" class="stat-value">0h 00m</span>
+            <span class="stat-label">Tiempo total</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon" aria-hidden="true">📅</span>
+          <div class="stat-info">
+            <span id="todayTimeCount" class="stat-value">0m</span>
+            <span class="stat-label">Estudio hoy</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon" aria-hidden="true">📚</span>
+          <div class="stat-info">
+            <span id="totalSessionsCount" class="stat-value">0</span>
+            <span class="stat-label">Sesiones</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Formulario para registrar sesión -->
+      <section class="card form-card" aria-labelledby="form-heading">
+        <h2 id="form-heading" class="section-title">Registrar sesión</h2>
+        
+        <form id="sessionForm" class="session-form" autocomplete="off">
+          <div class="form-group">
+            <label for="fecha" class="form-label">Fecha</label>
+            <input 
+              type="date" 
+              id="fecha" 
+              name="fecha" 
+              class="form-input" 
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="tema" class="form-label">Tema de estudio</label>
+            <input 
+              type="text" 
+              id="tema" 
+              name="tema" 
+              class="form-input" 
+              placeholder="Ej. Algoritmos, Matemáticas, Inglés..." 
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <div class="form-label-row">
+              <label for="minutos" class="form-label">Tiempo dedicado (minutos)</label>
+              <button type="button" id="toggleTimerBtn" class="timer-toggle-btn" aria-expanded="false">
+                ⏱️ Usar cronómetro
+              </button>
+            </div>
+
+            <!-- Widget de cronómetro integrado -->
+            <div id="timerWidget" class="timer-widget" hidden>
+              <div class="timer-display">
+                <span id="timerDigits" class="timer-digits">00:00</span>
+                <span id="timerStatus" class="timer-status">Detenido</span>
+              </div>
+              <div class="timer-controls">
+                <button type="button" id="timerStartBtn" class="timer-btn timer-btn-start">▶ Iniciar</button>
+                <button type="button" id="timerResetBtn" class="timer-btn timer-btn-reset" disabled>↺ Reiniciar</button>
+                <button type="button" id="timerApplyBtn" class="timer-btn timer-btn-apply" disabled>✓ Asignar minutos</button>
+              </div>
+            </div>
+
+            <input 
+              type="number" 
+              id="minutos" 
+              name="minutos" 
+              class="form-input" 
+              min="1" 
+              step="1" 
+              placeholder="Ej. 45" 
+              required
+            >
+          </div>
+
+          <button type="submit" class="btn-primary">
+            Guardar sesión
+          </button>
+        </form>
+      </section>
+
+      <!-- Historial de sesiones registradas -->
+      <section class="card history-card" aria-labelledby="history-heading">
+        <div class="history-header">
+          <h2 id="history-heading" class="section-title">Historial de sesiones</h2>
+          <span id="sessionCounter" class="badge-counter">0 sesiones</span>
+        </div>
+
+        <div id="sessionsContainer" class="sessions-container">
+          <!-- Renderizado dinámico desde app.js -->
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>Diario de Estudio &bull; Almacenamiento local</p>
+    </footer>
+  </div>
+
+  <!-- Compañero Interactivo: Yuji Itadori (Chatbot Gemini con Voz) -->
+  <aside id="yujiCompanion" class="yuji-companion" aria-label="Yuji Itadori, study companion chatbot">
+    <div id="yujiBubble" class="yuji-bubble" role="region" aria-label="Chat with Yuji Itadori">
+      <div class="yuji-chat-header">
+        <span class="yuji-name-tag">Yuji Itadori &bull; Gemini AI</span>
+        <div class="yuji-header-actions">
+          <span id="yujiTypingIndicator" class="yuji-typing-tag" hidden>pensando...</span>
+        </div>
+      </div>
+
+      <div class="yuji-speech-area">
+        <p id="yujiSpeech" class="yuji-speech">¡Osu! Soy Yuji. ¡Pregúntame lo que quieras o pídeme motivación para estudiar! ✌️🔥</p>
+      </div>
+
+      <!-- Barra de entrada para hablar con Yuji en inglés -->
+      <form id="yujiChatForm" class="yuji-chat-form" autocomplete="off">
+        <input 
+          type="text" 
+          id="yujiChatInput" 
+          class="yuji-chat-input" 
+          placeholder="Pregúntale algo a Yuji..." 
+          maxlength="160"
+        >
+        <button type="submit" id="yujiSendBtn" class="yuji-send-btn" title="Send message" aria-label="Send">
+          ➤
+        </button>
+      </form>
+      <span class="yuji-bubble-arrow" aria-hidden="true"></span>
+    </div>
+
+    <div class="yuji-avatar-wrapper" id="yujiAvatarBtn" role="button" tabindex="0" title="Click Yuji to interact!">
+      <img src="yuji_peace.png" alt="Yuji Itadori chibi" class="yuji-avatar" id="yujiImg">
+      <span class="yuji-click-hint">¡Pregúntame!</span>
+    </div>
+  </aside>
+
+  <!-- Música de fondo: Openings de Jujutsu Kaisen -->
+  <div id="ytContainer" style="position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;">
+    <div id="ytPlayer"></div>
+  </div>
+  <button id="musicToggle" title="Música JJK">🎵</button>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="app.js"></script>
+</body>
+</html>
+
