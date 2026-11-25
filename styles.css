@@ -891,46 +891,6 @@ body {
 }
 
 /* ==========================================================================
-   BOTÓN DE MÚSICA DE FONDO JJK
-   ========================================================================== */
-
-#musicToggle {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 999;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(20, 20, 35, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
-  font-size: 20px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-  line-height: 1;
-}
-
-#musicToggle:hover {
-  transform: scale(1.12);
-  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.45);
-}
-
-#musicToggle.playing {
-  animation: musicPulse 2s ease-in-out infinite;
-}
-
-@keyframes musicPulse {
-  0%, 100% { box-shadow: 0 4px 16px rgba(139, 92, 246, 0.35); }
-  50%       { box-shadow: 0 4px 28px rgba(139, 92, 246, 0.7); }
-}
-
-/* ==========================================================================
    PIE DE PÁGINA
    ========================================================================= */
 .app-footer {

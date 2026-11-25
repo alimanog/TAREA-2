@@ -49,58 +49,6 @@ const GEMINI_API_KEY = 'TU_API_KEY_AQUI';
 const GEMINI_MODEL = 'gemini-3.5-flash-lite';
 const GEMINI_ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
 
-/* ==========================================================================
-   MÚSICA DE FONDO: OPENINGS DE JUJUTSU KAISEN (YouTube IFrame API)
-   ========================================================================== */
-
-const JJK_TRACKS = [
-  'D2IZLH6LKNE', // Kaikai Kitan - Eve (OP1 T1)
-  'kJd1Jrv4bOE', // VIVID VICE - Who-ya Extended (OP2 T1)
-  'JsAFkDf6R3M', // Ao no Sumika - Tatsuya Kitani (OP1 T2)
-  'Rk8dJhNimKQ'  // SPECIALZ - King Gnu (OP2 T2)
-];
-
-let ytPlayer = null;
-let jjkTrackIndex = 0;
-let jjkPlaying = false;
-
-function onYouTubeIframeAPIReady() {
-  ytPlayer = new YT.Player('ytPlayer', {
-    height: '1', width: '1',
-    videoId: JJK_TRACKS[jjkTrackIndex],
-    playerVars: { autoplay: 0, controls: 0, rel: 0, playsinline: 1 },
-    events: {
-      onStateChange: (e) => {
-        // Al acabar la canción, pasa a la siguiente
-        if (e.data === YT.PlayerState.ENDED) {
-          jjkTrackIndex = (jjkTrackIndex + 1) % JJK_TRACKS.length;
-          ytPlayer.loadVideoById(JJK_TRACKS[jjkTrackIndex]);
-        }
-      }
-    }
-  });
-}
-
-function inicializarMusicaJJK() {
-  const btn = document.getElementById('musicToggle');
-  if (!btn) return;
-  btn.addEventListener('click', () => {
-    if (!ytPlayer) return;
-    if (jjkPlaying) {
-      ytPlayer.pauseVideo();
-      jjkPlaying = false;
-      btn.textContent = '🎵';
-      btn.classList.remove('playing');
-    } else {
-      ytPlayer.setVolume(40);
-      ytPlayer.playVideo();
-      jjkPlaying = true;
-      btn.textContent = '🔇';
-      btn.classList.add('playing');
-    }
-  });
-}
-
 // Poses auténticas del personaje (estilo sticker original)
 const YUJI_POSES = {
   peace: 'yuji_peace.png',
@@ -602,9 +550,6 @@ function inicializar() {
       hacerHablarYuji();
     }
   });
-
-  // Inicializar música de fondo JJK
-  inicializarMusicaJJK();
 }
 
 function manejarEnvioFormulario(evento) {
